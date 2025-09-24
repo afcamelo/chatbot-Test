@@ -10,7 +10,15 @@
     <div class="container">
         <h1>Bem-vindo!</h1>
         <p>Esta é uma página HTML simples.</p>
-        <button id="btnClick">Clique em mim!</button>
+        <div id="systemInfo" class="system-info">
+            <h2>Informações do Sistema</h2>
+            <p>Navegador: <span id="browser"></span></p>
+            <p>Sistema Operacional: <span id="os"></span></p>
+            <p>Idioma: <span id="language"></span></p>
+            <p>Resolução da Tela: <span id="resolution"></span></p>
+            <p>Data e Hora: <span id="datetime"></span></p>
+        </div>
+        <button id="btnClick">Atualizar Informações</button>
     </div>
     <script src="script.js"></script>
 </body>

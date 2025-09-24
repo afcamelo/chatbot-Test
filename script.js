@@ -1,13 +1,51 @@
-// Variáveis globais para armazenar informações do dispositivo
-let deviceType = '';
-let operatingSystem = '';
-let browser = '';
-let browserVersion = '';
-let deviceDescription = '';
-
-// Função para detectar o dispositivo, sistema operacional e navegador
-function detectDeviceInfo() {
+// Função para obter e exibir informações do sistema
+function getSystemInfo() {
     const userAgent = navigator.userAgent;
+
+    // Detectar navegador
+    let browserInfo = 'Desconhecido';
+    if (userAgent.indexOf('Chrome') !== -1 && userAgent.indexOf('Edg') === -1) {
+        const chromeVersion = userAgent.match(/Chrome\/(\d+)/);
+        browserInfo = `Chrome ${chromeVersion ? chromeVersion[1] : ''}`;
+    } else if (userAgent.indexOf('Firefox') !== -1) {
+        const firefoxVersion = userAgent.match(/Firefox\/(\d+)/);
+        browserInfo = `Firefox ${firefoxVersion ? firefoxVersion[1] : ''}`;
+    } else if (userAgent.indexOf('Safari') !== -1) {
+        const safariVersion = userAgent.match(/Version\/(\d+)/);
+        browserInfo = `Safari ${safariVersion ? safariVersion[1] : ''}`;
+    }
+    document.getElementById('browser').textContent = browserInfo;
+
+    // Detectar sistema operacional
+    let os = 'Desconhecido';
+    if (userAgent.indexOf('Win') !== -1) os = 'Windows';
+    else if (userAgent.indexOf('Mac') !== -1) os = 'macOS';
+    else if (userAgent.indexOf('Linux') !== -1) os = 'Linux';
+    else if (userAgent.indexOf('Android') !== -1) os = 'Android';
+    else if (userAgent.indexOf('iOS') !== -1) os = 'iOS';
+    document.getElementById('os').textContent = os;
+
+    // Obter idioma
+    document.getElementById('language').textContent = navigator.language || navigator.userLanguage;
+
+    // Obter resolução
+    document.getElementById('resolution').textContent = `${window.screen.width}x${window.screen.height}`;
+
+    // Obter data e hora
+    const now = new Date();
+    document.getElementById('datetime').textContent = now.toLocaleString('pt-BR');
+}
+
+// Inicializar quando o documento estiver pronto
+document.addEventListener('DOMContentLoaded', () => {
+    const button = document.getElementById('btnClick');
+    
+    // Executar imediatamente
+    getSystemInfo();
+    
+    // Atualizar quando o botão for clicado
+    button.addEventListener('click', getSystemInfo);
+});
 
     // Detectar se é mobile ou desktop
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
@@ -62,7 +100,7 @@ function detectDeviceInfo() {
 
     // Criar descrição completa
     deviceDescription = `${deviceType} - ${operatingSystem} - ${browser} ${browserVersion}`;
-}
+
 
 // Função para inicializar o Watson Assistant
 function initializeWatsonAssistant() {

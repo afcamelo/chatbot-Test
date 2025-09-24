@@ -5,6 +5,25 @@
     text-align: center;
 }
 
+.system-info {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.system-info h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.system-info p {
+    margin: 10px 0;
+    color: #666;
+}
+
 button {
     padding: 10px 20px;
     font-size: 16px;
